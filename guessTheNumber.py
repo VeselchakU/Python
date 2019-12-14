@@ -16,4 +16,17 @@ maxScore = 0        # Максимальное за сессию игры
 
 # ====================================================
 
-digit = random.randint(10, 99)
+digit = random.randint(lowDigit, highDigit)
+print('Копьютер загадал число, попробуйте отгадать!')
+print(f'Загаданное число: {digit}')
+
+x = ''
+while (not x.isdigit()):
+	x = input(f'Введите число от {lowDigit} до {highDigit}: ')
+	if (not x.isdigit()):
+		print('.' * 27 + 'Введите, пожалуйста, число.')
+
+x = int(x)
+
+if (x == digit):
+	print('Победа! Поздравляем!')
