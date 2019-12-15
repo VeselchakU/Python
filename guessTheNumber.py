@@ -14,34 +14,42 @@ startScore = 100    # Начальное количество очков
 score = 0           # Текущее количество очков
 maxScore = 0        # Максимальное за сессию игры
 
-# ====================================================
-
-while (playGame):  									# Главный цикл
-	digit = random.randint(lowDigit, highDigit)		# Загадываем число
+# -------------------------------- Главный цикл
+while (playGame):  
+	digit = random.randint(lowDigit, highDigit)	# Загадываем число
 	print(f'Загаданное число: {digit}')
 	print('-' * 30)
 	countInput = 0
 	score = startScore
 	print('Я загадал число, попробуйте отгадать!')
 
-	while (not win and score > 0):			#Внутренний цикл
-		print('-' * 30)
+# -------------------------------- Внутренний цикл
+	while (not win and score > 0):		
+		print('-' * 45)
 		print(f'Заработано очков: {score}')
 		print(f'Рекорд: {maxScore}')
 
-		x = ''	     						# Сбрасываем для условия в while
-		while (not x.isdigit()):			# Контроль ввода числа
+# -------------------------------- Контроль ввода числа
+		x = ''
+		diapason = False
+		xIsDigit = True	     			# Сбрасываем для условия в while
+		while (xIsDigit and not diapason):
 			x = input(f'Введите число от {lowDigit} до {highDigit}: ')
 			if (not x.isdigit()):
-				print('.' * 27 + 'Введите, пожалуйста, число.')
+				xIsDigit = True
+				print('.' * 17 + 'Введите, пожалуйста, число.')
+			else:
+				x = int(x)
+				diapason = (x >= lowDigit and x <= highDigit)
+				if (not diapason):
+					print('.' * 17 + f'Число от {lowDigit} до {highDigit}')
 
-		x = int(x)
-
-		if (x == digit):
-			win = True 		# Сбрасываем win
-		else:
+# -------------------------------- Подсказки
+		if (x == digit):				# Сбрасываем win для выхода при победе
+			win = True 		
+		else:							# Иначе активируем подсказки
 			length = abs(x - digit)
-			if (length < 3):
+			if (length < 3):			# Удаленность от числа
 				print('Очень горячо!')
 			elif (length < 5):
 				print('Горячо!')
@@ -54,7 +62,7 @@ while (playGame):  									# Главный цикл
 			else:
 				print('Ледяной ветер')
 
-			if (countInput == 7):
+			if (countInput == 7):		# Увеличение числа ходов
 				score -= 10
 				if (digit % 2 == 0):
 					print('Число четное')
@@ -80,10 +88,11 @@ while (playGame):  									# Главный цикл
 					print('Загаданное число БОЛЬШЕ вашего')
 			score -=5
 		countInput += 1
+# -------------------------------- Конец внутреннего цикла
 
-	print('-' * 30)
+	print('-' * 45)
 	if (x == digit):
-		print('Победа! Поздравляем!')
+		print('Победа! Поздравляю!')
 		print(f'Заработано очков: {score}')
 	else:
 		print('Ой, у вас закончились очки. Вы проиграли :(')
@@ -95,8 +104,10 @@ while (playGame):  									# Главный цикл
 
 	if (score > maxScore):
 		maxScore = score
+# -------------------------------- Конец главного цикла
 
-print('-' * 30)
+print('-' * 45)
+print(f'Лучший результат: {maxScore}')
 print('''Спасибо что сыграли в мою игру!
 Возвращайтесь скорей! Буду ждать с нетерпением!
 P.S. Вы хорошо держались :)''')
