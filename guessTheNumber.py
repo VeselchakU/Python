@@ -17,7 +17,7 @@ maxScore = 0        # Максимальное за сессию игры
 # -------------------------------- Главный цикл
 while (playGame):  
 	digit = random.randint(lowDigit, highDigit)	# Загадываем число
-	print(f'Загаданное число: {digit}')
+	# print(f'Загаданное число: {digit}')  Вывод загаданного числа
 	print('-' * 30)
 	countInput = 0
 	score = startScore
